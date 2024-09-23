@@ -61,5 +61,6 @@
     "price_($)": "Price ($)",
     "margin_(%)": "Margin (%)",
     "total": "Total",
-    "action": "Action"
+    "action": "Action",
+    "logout": "Logout"
 }

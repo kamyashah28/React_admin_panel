@@ -61,6 +61,7 @@
     "price": "Prix ($)",
     "margin": "Marge (%)",
     "total": "totale",
-    "action": "Action"
+    "action": "Action",
+    "logout": "Déconnexion"
   }
   

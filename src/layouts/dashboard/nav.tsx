@@ -10,6 +10,7 @@ import { RouterLink } from '../../routes/components';
 import { varAlpha } from '../../theme/styles';
 import { Logo } from '../../components/logo';
 import { Scrollbar } from '../../components/scrollbar';
+import { LogoutButton } from '../../sections/auth';
 
 export type NavContentProps = {
   data: {
@@ -161,6 +162,7 @@ export function NavContent({ data, slots, sx }: NavContentProps) {
       </Scrollbar>
 
       {slots?.bottomArea}
+      <LogoutButton />
     </>
   );
 }
