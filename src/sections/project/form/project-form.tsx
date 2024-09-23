@@ -7,10 +7,10 @@ import { RootState } from '../../../store';
 import { addProject, updateProject } from '../../../store/projectSlice';
 import * as Yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
-import { useTranslation } from 'react-i18next'; 
+import { useTranslation } from 'react-i18next';
 
 const ProjectForm = () => {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
@@ -64,7 +64,7 @@ const ProjectForm = () => {
     if (id && initialProject) {
       formik.setValues(initialProject);
     }
-  }, [id, initialProject]); 
+  }, [id, initialProject]);
 
   return (
     <Box p={3}>
@@ -208,9 +208,9 @@ const ProjectForm = () => {
                 error={formik.touched.status && Boolean(formik.errors.status)}
                 helperText={formik.touched.status && formik.errors.status}
               >
-                <MenuItem value="Created">{t('created')}</MenuItem>
-                <MenuItem value="In Progress">{t('in_progress')}</MenuItem>
+                <MenuItem value="Processing">{t('processing')}</MenuItem>
                 <MenuItem value="Completed">{t('completed')}</MenuItem>
+                <MenuItem value="Rejected">{t('rejected')}</MenuItem>
               </TextField>
             </Grid>
 

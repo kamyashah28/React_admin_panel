@@ -16,11 +16,14 @@ import {
     TableRow,
     Paper,
     Divider,
+    FormControl,
 } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Select } from '@mui/material';
+import { MenuItem } from '@mui/material';
 
 const EstimateForm = () => {
     const { t } = useTranslation();
@@ -164,7 +167,7 @@ const EstimateForm = () => {
                                                 variant="outlined"
                                                 size="small"
                                                 value={item.title}
-                                                onChange={(e) => handleInputChange(section.id, item.id, 'title', e.target.value)}
+                                                onChange={(e: any) => handleInputChange(section.id, item.id, 'title', e.target.value)}
                                             />
                                         </TableCell>
                                         <TableCell>
@@ -173,17 +176,19 @@ const EstimateForm = () => {
                                                 variant="outlined"
                                                 size="small"
                                                 value={item.description}
-                                                onChange={(e) => handleInputChange(section.id, item.id, 'description', e.target.value)}
+                                                onChange={(e: any) => handleInputChange(section.id, item.id, 'description', e.target.value)}
                                             />
                                         </TableCell>
                                         <TableCell>
-                                            <TextField
-                                                fullWidth
-                                                variant="outlined"
-                                                size="small"
-                                                value={item.unit}
-                                                onChange={(e) => handleInputChange(section.id, item.id, 'unit', e.target.value)}
-                                            />
+                                            <FormControl fullWidth variant="outlined" size="small">
+                                                <Select
+                                                    value={item.unit}
+                                                    onChange={(e: any) => handleInputChange(section.id, item.id, 'unit', e.target.value)}
+                                                >
+                                                    <MenuItem value="quantity">{t('quantity')}</MenuItem>
+                                                    <MenuItem value="piece">{t('piece')}</MenuItem>
+                                                </Select>
+                                            </FormControl>
                                         </TableCell>
                                         <TableCell>
                                             <TextField
@@ -192,7 +197,7 @@ const EstimateForm = () => {
                                                 variant="outlined"
                                                 size="small"
                                                 value={item.quantity}
-                                                onChange={(e) => handleInputChange(section.id, item.id, 'quantity', parseInt(e.target.value))}
+                                                onChange={(e: any) => handleInputChange(section.id, item.id, 'quantity', parseInt(e.target.value))}
                                             />
                                         </TableCell>
                                         <TableCell>
@@ -202,7 +207,7 @@ const EstimateForm = () => {
                                                 variant="outlined"
                                                 size="small"
                                                 value={item.price}
-                                                onChange={(e) => handleInputChange(section.id, item.id, 'price', parseFloat(e.target.value))}
+                                                onChange={(e: any) => handleInputChange(section.id, item.id, 'price', parseFloat(e.target.value))}
                                             />
                                         </TableCell>
                                         <TableCell>
@@ -212,7 +217,7 @@ const EstimateForm = () => {
                                                 variant="outlined"
                                                 size="small"
                                                 value={item.margin}
-                                                onChange={(e) => handleInputChange(section.id, item.id, 'margin', parseFloat(e.target.value))}
+                                                onChange={(e: any) => handleInputChange(section.id, item.id, 'margin', parseFloat(e.target.value))}
                                             />
                                         </TableCell>
                                         <TableCell>
@@ -228,29 +233,27 @@ const EstimateForm = () => {
                                         </TableCell>
                                     </TableRow>
                                 ))}
-
                             </TableBody>
+
                         </Table>
                         <Box mt={3} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', width: 'auto', mr: 2 }}>
-    <Divider sx={{ width: '250px', mb: 1 }} />
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '250px', mb: 1 }}>
-        <Typography variant="body1">{t('sub_total')}:</Typography>
-        <Typography variant="body1">{subtotal.toFixed(2)}</Typography>
-    </Box>
-    <Divider sx={{ width: '250px', my: 1 }} />
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '250px', mb: 1 }}>
-        <Typography variant="body1">{t('total_margin')}:</Typography>
-        <Typography variant="body1">{totalMargin.toFixed(2)}</Typography>
-    </Box>
-    <Divider sx={{ width: '250px', my: 1 }} />
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '250px' }}>
-        <Typography variant="h6">{t('total')}:</Typography>
-        <Typography variant="h6">{(subtotal + totalMargin).toFixed(2)}</Typography>
-    </Box>
-    <Divider sx={{ width: '250px', mt: 1 }} />
-</Box>
-
-
+                            <Divider sx={{ width: '250px', mb: 1 }} />
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '250px', mb: 1 }}>
+                                <Typography variant="body1">{t('sub_total')}:</Typography>
+                                <Typography variant="body1">{subtotal.toFixed(2)}</Typography>
+                            </Box>
+                            <Divider sx={{ width: '250px', my: 1 }} />
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '250px', mb: 1 }}>
+                                <Typography variant="body1">{t('total_margin')}:</Typography>
+                                <Typography variant="body1">{totalMargin.toFixed(2)}</Typography>
+                            </Box>
+                            <Divider sx={{ width: '250px', my: 1 }} />
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '250px' }}>
+                                <Typography variant="h6">{t('total')}:</Typography>
+                                <Typography variant="h6">{(subtotal + totalMargin).toFixed(2)}</Typography>
+                            </Box>
+                            <Divider sx={{ width: '250px', mt: 1 }} />
+                        </Box>
                     </TableContainer>
                 </Box>
             ))}
