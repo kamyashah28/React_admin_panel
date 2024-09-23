@@ -14,6 +14,10 @@
 - npm run dev (for project run)
 - json-server --watch db.json (for json server for user login, register)
 
+For Login dummy data: 
+    email: test@gmail.com,
+    password: test@123
+
 2. Description of the project structure.
 - node_modules -> install packages store in the node_modules
 - public -> public folder consist backgroud images, fonts, icons, images, logo etc
@@ -86,6 +90,3 @@
 5. Notes on design choices and any other relevant information.
 - Design Tool : Material ui
 
-
-git config --global user.name "Kamya Shah"
-git config --global user.email "kamyashah2807@gmail.com"
