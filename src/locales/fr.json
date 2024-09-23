@@ -62,6 +62,8 @@
     "margin": "Marge (%)",
     "total": "totale",
     "action": "Action",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "sub_total": "Sous-total",
+    "total_margin": "Marge totale"
   }
   

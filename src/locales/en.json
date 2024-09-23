@@ -62,5 +62,7 @@
     "margin_(%)": "Margin (%)",
     "total": "Total",
     "action": "Action",
-    "logout": "Logout"
+    "logout": "Logout",
+    "sub_total": "Sub Total",
+    "total_margin": "Total Margin"
 }

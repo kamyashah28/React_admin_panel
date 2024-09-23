@@ -15,6 +15,7 @@ import {
     TableHead,
     TableRow,
     Paper,
+    Divider,
 } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
@@ -22,7 +23,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const EstimateForm = () => {
-    const { t } = useTranslation()
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams();
@@ -115,9 +116,25 @@ const EstimateForm = () => {
         navigate('/estimations');
     };
 
+    const calculateTotals = () => {
+        let subtotal = 0;
+        let totalMargin = 0;
+
+        estimate.sections.forEach((section: any) => {
+            section.items.forEach((item: any) => {
+                const itemTotal = item.quantity * item.price;
+                const itemMargin = (itemTotal * item.margin) / 100;
+                subtotal += itemTotal;
+                totalMargin += itemMargin;
+            });
+        });
+        return { subtotal, totalMargin };
+    };
+    const { subtotal, totalMargin } = calculateTotals();
+
     return (
         <Box sx={{ maxWidth: '1000px', p: 2 }}>
-            <Typography variant="h4" sx={{ mb: 2 }}>{initialData ?  `${t('edit_estimate')}` : `${t('add_new_estimate')}`}</Typography>
+            <Typography variant="h4" sx={{ mb: 2 }}>{initialData ? `${t('edit_estimate')}` : `${t('add_new_estimate')}`}</Typography>
             {estimate.sections.map((section: any, sectionIndex: number) => (
                 <Box key={section.id}>
                     <Typography variant="h6" sx={{ mt: 2, mb: 1 }}> <IconButton onClick={() => handleAddSection()}>
@@ -214,10 +231,30 @@ const EstimateForm = () => {
 
                             </TableBody>
                         </Table>
+                        <Box mt={3} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', width: 'auto', mr: 2 }}>
+    <Divider sx={{ width: '250px', mb: 1 }} />
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '250px', mb: 1 }}>
+        <Typography variant="body1">{t('sub_total')}:</Typography>
+        <Typography variant="body1">{subtotal.toFixed(2)}</Typography>
+    </Box>
+    <Divider sx={{ width: '250px', my: 1 }} />
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '250px', mb: 1 }}>
+        <Typography variant="body1">{t('total_margin')}:</Typography>
+        <Typography variant="body1">{totalMargin.toFixed(2)}</Typography>
+    </Box>
+    <Divider sx={{ width: '250px', my: 1 }} />
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '250px' }}>
+        <Typography variant="h6">{t('total')}:</Typography>
+        <Typography variant="h6">{(subtotal + totalMargin).toFixed(2)}</Typography>
+    </Box>
+    <Divider sx={{ width: '250px', mt: 1 }} />
+</Box>
+
+
                     </TableContainer>
                 </Box>
             ))}
-            <Box mt={4} display="flex" justifyContent="flex-start" gap={2}>
+            <Box mt={4} display="flex" justifyContent="flex-end" gap={2}>
                 <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>
                     {id ? `${t('update_estimate')}` : `${t('add_estimate')}`}
                 </Button>
